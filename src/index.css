@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* YUVA brand system: civic trust, justice, and practical technology. */
+  --yuva-maroon: #641C2A;
+  --yuva-maroon-dark: #3E101A;
+  --yuva-maroon-deep: #2A0B12;
+  --yuva-maroon-light: #7D2939;
+  --yuva-gold: #D9A441;
+  --yuva-gold-light: #F0C96A;
+  --yuva-gold-pale: #F8E7B0;
+  --yuva-gold-dark: #A97818;
+  --yuva-teal: #087E8B;
+  --yuva-teal-light: #20A7A8;
+  --yuva-teal-bright: #2BC4C7;
+  --yuva-teal-dark: #05545D;
+  --yuva-teal-pale: #DDF3F1;
+  --bg-primary: #F7F4ED;
+  --bg-secondary: #EFEAE0;
+  --bg-tertiary: #E6DFD2;
+  --bg-card: #FFFDF8;
+  --bg-card-hover: #FBF8F0;
+  --bg-dark: #171717;
+  --bg-dark-secondary: #241316;
+  --bg-dark-card: #301820;
+  --text-primary: #171717;
+  --text-secondary: #625D57;
+  --text-muted: #8A837B;
+  --text-light: #FFFDF8;
+  --text-light-muted: #D8D1C7;
+  --success: #287A4B;
+  --success-light: #DDF1E4;
+  --warning: #C98219;
+  --warning-light: #F9E9C9;
+  --danger: #B83232;
+  --danger-light: #F7DCDC;
+  --info: #087E8B;
+  --info-light: #DDF3F1;
+  --border-light: #E1D9CC;
+  --border-medium: #CEC4B5;
+  --border-dark: #9E9181;
+  --border-gold: rgba(217, 164, 65, 0.35);
+  --border-teal: rgba(8, 126, 139, 0.30);
+  --border-maroon: rgba(100, 28, 42, 0.25);
+  --gradient-brand: linear-gradient(135deg, #641C2A, #3E101A);
+  --gradient-justice: linear-gradient(135deg, #641C2A, #D9A441);
+  --gradient-ai: linear-gradient(135deg, #087E8B, #20A7A8);
+  --gradient-premium: linear-gradient(135deg, #3E101A, #641C2A, #D9A441);
+  --gradient-light: linear-gradient(135deg, #F7F4ED, #EFEAE0);
+  --shadow-sm: 0 4px 12px rgba(62, 16, 26, 0.06);
+  --shadow-md: 0 10px 35px rgba(62, 16, 26, 0.08);
+  --shadow-lg: 0 18px 45px rgba(62, 16, 26, 0.14);
+  --shadow-maroon: 0 10px 30px rgba(100, 28, 42, 0.22);
+  --shadow-gold: 0 8px 25px rgba(217, 164, 65, 0.20);
+  --shadow-teal: 0 8px 25px rgba(8, 126, 139, 0.18);
+  --overlay-dark: rgba(23, 23, 23, 0.65);
+  --overlay-maroon: rgba(62, 16, 26, 0.85);
+  --overlay-gold: rgba(217, 164, 65, 0.12);
+  --overlay-teal: rgba(8, 126, 139, 0.12);
+
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-light);
+  background: var(--bg-dark);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(217, 164, 65, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(8, 126, 139, 0.16), transparent 26%),
+    var(--bg-dark);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(240, 201, 106, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 201, 106, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.hero-shell {
+  position: relative;
+}
+
+.network-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(43, 196, 199, 0.25), transparent 14%),
+    radial-gradient(circle at 70% 35%, rgba(217, 164, 65, 0.18), transparent 17%),
+    radial-gradient(circle at 50% 80%, rgba(100, 28, 42, 0.24), transparent 18%);
+  filter: blur(18px);
+  opacity: 0.9;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--yuva-gold-dark);
+  border-radius: 999px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--yuva-teal-bright);
+  box-shadow: 0 0 0 3px rgba(43, 196, 199, 0.18);
+}
+
+/* Compatibility skin for the existing Tailwind component vocabulary. */
+[class*='bg-[#040914]'] { background-color: var(--bg-dark); }
+[class*='bg-slate-950'] { background-color: var(--bg-dark-secondary); }
+[class*='bg-slate-900'] { background-color: var(--bg-dark-card); }
+[class*='bg-white\/5'] { background-color: rgba(255, 253, 248, 0.06); }
+[class*='border-white'] { border-color: rgba(248, 231, 176, 0.16); }
+[class*='text-slate-100'], [class*='text-white'] { color: var(--text-light); }
+[class*='text-slate-200'], [class*='text-slate-300'] { color: var(--text-light-muted); }
+[class*='text-slate-400'] { color: #B7A99A; }
+[class*='text-cyan-'] { color: var(--yuva-teal-bright); }
+[class*='text-violet-'] { color: var(--yuva-gold-light); }
+[class*='border-cyan-'] { border-color: var(--border-teal); }
+[class*='border-violet-'] { border-color: var(--border-gold); }
+[class*='bg-cyan-'] { background-color: rgba(8, 126, 139, 0.16); }
+[class*='bg-violet-'] { background-color: rgba(100, 28, 42, 0.24); }
+[class*='from-cyan-'] { --tw-gradient-from: var(--yuva-teal); }
+[class*='to-violet-'] { --tw-gradient-to: var(--yuva-maroon); }
+[class*='from-slate-900'] { --tw-gradient-from: var(--bg-dark-card); }
+[class*='to-slate-950'] { --tw-gradient-to: var(--bg-dark-secondary); }
+[class*='bg-emerald-'] { background-color: rgba(40, 122, 75, 0.18); }
+[class*='text-emerald-'] { color: #8FD3A5; }
+[class*='text-amber-'] { color: var(--yuva-gold-light); }
+[class*='border-amber-'] { border-color: var(--border-gold); }
+[class*='bg-amber-'] { background-color: rgba(217, 164, 65, 0.14); }
