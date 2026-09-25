@@ -26,6 +26,17 @@ export async function loginUser(role: Role, email: string, password: string): Pr
   })
 }
 
+export async function fetchAuthorities(): Promise<{ authorities: Array<{ name: string; email: string; designation: string; department: string; officeName: string }> }> {
+  return request<{ authorities: Array<{ name: string; email: string; designation: string; department: string; officeName: string }> }>('/authorities')
+}
+
+export async function sendChatMessage(message: string): Promise<{ reply: string }> {
+  return request<{ reply: string }>('/chat', {
+    method: 'POST',
+    body: JSON.stringify({ message }),
+  })
+}
+
 export async function fetchComplaints(): Promise<{ complaints: Complaint[] }> {
   return request<{ complaints: Complaint[] }>('/complaints')
 }

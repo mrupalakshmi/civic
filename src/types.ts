@@ -12,12 +12,19 @@ export type ComplaintStatus =
   | 'VERIFIED'
   | 'RESOLVED'
 
+export type ComplaintLocation = {
+  address: string
+  latitude: number
+  longitude: number
+}
+
 export type Complaint = {
   id: string
   title: string
   category: string
   description: string
   location: string
+  locationDetails: ComplaintLocation
   priority: ComplaintPriority
   department: string
   authority: string
@@ -47,5 +54,7 @@ export type ComplaintInput = {
   title: string
   category: string
   location: string
+  latitude?: number
+  longitude?: number
   description: string
 }

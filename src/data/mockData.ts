@@ -109,6 +109,8 @@ export const initialComplaintForm = {
   title: 'Large pothole near a school',
   category: 'Road Infrastructure',
   location: 'Near Government High School, Sector 12',
+  latitude: 16.5062,
+  longitude: 80.648,
   description:
     'There is a large pothole near a school. It is dangerous for students and two-wheelers, especially during rain.',
 }

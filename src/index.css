@@ -60,11 +60,14 @@
   --overlay-gold: rgba(217, 164, 65, 0.12);
   --overlay-teal: rgba(8, 126, 139, 0.12);
 
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Inter, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--text-light);
-  background: var(--bg-dark);
+  background:
+    radial-gradient(circle at top left, rgba(217, 164, 65, 0.12), transparent 25%),
+    radial-gradient(circle at bottom right, rgba(8, 126, 139, 0.12), transparent 28%),
+    var(--bg-dark);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -80,9 +83,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(217, 164, 65, 0.12), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(8, 126, 139, 0.16), transparent 26%),
-    var(--bg-dark);
+    radial-gradient(circle at top left, rgba(217, 164, 65, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(8, 126, 139, 0.14), transparent 30%),
+    linear-gradient(180deg, #1a1012 0%, #171717 30%, #0f0f12 100%);
+  color: var(--text-light);
 }
 
 body::before {
@@ -103,6 +107,37 @@ body::before {
   position: relative;
 }
 
+.hero-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(100, 28, 42, 0.12), rgba(8, 126, 139, 0.04), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.hero-panel-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.04) 25%, transparent 50%, rgba(217,164,65,0.06) 75%, transparent 100%);
+  transform: translateX(-20%);
+  animation: heroShimmer 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes heroShimmer {
+  0% {
+    transform: translateX(-18%) translateY(0);
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(18%) translateY(3%);
+    opacity: 0.35;
+  }
+}
+
 .network-grid {
   position: absolute;
   inset: 0;
@@ -112,6 +147,49 @@ body::before {
     radial-gradient(circle at 50% 80%, rgba(100, 28, 42, 0.24), transparent 18%);
   filter: blur(18px);
   opacity: 0.9;
+}
+
+.stat-tile {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(15,23,42,0.18));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.hero-portal {
+  isolation: isolate;
+}
+
+.portal-glow {
+  position: absolute;
+  inset: 10% 15% auto 15%;
+  height: 240px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.28) 0%, rgba(8, 126, 139, 0.12) 30%, transparent 70%);
+  filter: blur(30px);
+  opacity: 0.9;
+}
+
+.portal-grid {
+  position: absolute;
+  inset: 10% 10% 8% 10%;
+  border-radius: 24px;
+  background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+  opacity: 0.45;
+}
+
+.portal-frame {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 0 36px rgba(8,126,139,0.12);
+}
+
+.story-node {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.story-node:hover {
+  transform: translateY(-1px);
+  border-color: rgba(217, 164, 65, 0.34);
+  box-shadow: 0 8px 22px rgba(8, 126, 139, 0.12);
 }
 
 ::-webkit-scrollbar {

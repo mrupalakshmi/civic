@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                    String      @id @default(cuid())
+  name                  String
+  email                 String      @unique
+  password              String
+  role                  String
+  phone                 String?
+  designation           String?
+  department            String?
+  officeName            String?
+  isActive              Boolean     @default(true)
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+  citizenComplaints     Complaint[] @relation("CitizenComplaints")
+  assignedComplaints    Complaint[] @relation("AssignedComplaints")
+  notifications         Notification[]
+}
+
+model Department {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  description String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  complaints  Complaint[]
+}
+
+model Complaint {
+  id                    String      @id @default(cuid())
+  complaintId           String      @unique
+  title                 String
+  description           String
+  category              String
+  priority              String      @default("HIGH")
+  status                String      @default("SUBMITTED")
+  address               String
+  latitude              Float
+  longitude             Float
+  departmentId          String?
+  citizenId             String?
+  assignedAuthorityId   String?
+  aiSummary             String?
+  aiSuggestedAction     String?
+  keywords              String      @default("[]")
+  sentiment             String?     @default("Neutral")
+  estimatedResolution   String?     @default("3 days")
+  evidence              String      @default("[]")
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime          @updatedAt
+  resolvedAt            DateTime?
+  department            Department?       @relation(fields: [departmentId], references: [id])
+  citizen               User?             @relation("CitizenComplaints", fields: [citizenId], references: [id])
+  assignedAuthority     User?             @relation("AssignedComplaints", fields: [assignedAuthorityId], references: [id])
+  updates               ComplaintUpdate[]
+  escalations           Escalation[]
+  feedbacks             Feedback[]
+}
+
+model ComplaintUpdate {
+  id          String    @id @default(cuid())
+  complaintId String
+  status      String
+  message     String
+  updatedBy   String
+  createdAt   DateTime  @default(now())
+  complaint   Complaint @relation(fields: [complaintId], references: [id])
+}
+
+model Escalation {
+  id          String    @id @default(cuid())
+  complaintId String
+  level       String
+  reason      String
+  status      String    @default("OPEN")
+  createdAt   DateTime  @default(now())
+  resolvedAt  DateTime?
+  complaint   Complaint @relation(fields: [complaintId], references: [id])
+}
+
+model Feedback {
+  id          String    @id @default(cuid())
+  complaintId String
+  rating      Int
+  comment     String?
+  createdAt   DateTime  @default(now())
+  complaint   Complaint @relation(fields: [complaintId], references: [id])
+}
+
+model Case {
+  id          String   @id @default(cuid())
+  caseName    String
+  court       String
+  year        Int
+  category    String
+  summary     String
+  judgment    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CaseStudy {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  problem     String
+  background  String
+  actions     String
+  technology  String
+  outcome     String
+  lessons     String
+  createdAt   DateTime @default(now())
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  summary     String
+  source      String
+  sourceUrl   String
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String    @default("INFO")
+  read      Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+}
